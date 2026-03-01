@@ -15,7 +15,7 @@
 
     <xacro:property name="caster_xoff" value="0.14"/>
 
-    <!-- Define some commonly used inertial properties  -->
+    <!-- Define some commonly used intertial properties  -->
     <xacro:macro name="box_inertia" params="m w h d">
       <inertial>
         <pose>0 0 0 ${pi/2} 0 ${pi/2}</pose>
@@ -82,7 +82,7 @@
             ${base_length} ${base_width} ${base_height}
           </size></box>
         </geometry>
-      </collision>
+      </collision> 
     </link>
 
     <!-- Robot Footprint -->
@@ -139,8 +139,6 @@
           <limit>
             <lower>-inf</lower>
             <upper>inf</upper>
-            <effort>5</effort>
-            <velocity>10</velocity>
           </limit>
         </axis>
       </joint>
@@ -295,14 +293,12 @@
 
       <frame_id>odom</frame_id>
       <child_frame_id>base_link</child_frame_id>
-
     </plugin>
 
     <plugin
       filename="gz-sim-joint-state-publisher-system"
       name="gz::sim::systems::JointStatePublisher">
       <topic>joint_states</topic>
-
     </plugin>
 
     <joint name="lidar_joint" type="fixed">
@@ -339,7 +335,7 @@
         <update_rate>5</update_rate>
         <topic>scan</topic>
         <gz_frame_id>lidar_link</gz_frame_id>
-        <lidar>
+        <ray>
           <scan>
             <horizontal>
               <samples>360</samples>
@@ -358,7 +354,7 @@
             <mean>0.0</mean>
             <stddev>0.01</stddev>
           </noise>
-        </lidar>
+        </ray>
       </sensor>
     </link>
 
@@ -420,6 +416,5 @@
         <hackBaseline>0</hackBaseline>
       </sensor>
     </link>
-
   </model>
 </sdf>
